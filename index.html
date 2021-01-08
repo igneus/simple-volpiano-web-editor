@@ -11,6 +11,7 @@
       .wordspace { background-color: #f99; }
       .sylspace { background-color: #99f; }
       .nonstandard { background-color: magenta; }
+      #legend { margin-top: 80px; text-align: center; font-size: small; }
     </style>
   </head>
   <body>
@@ -18,6 +19,18 @@
     <textarea id="editor">
       1---
     </textarea>
+    <div id="legend">
+      <p>
+	This is a simple editor with preview for music transcriptions with the <a href="http://www.fawe.de/volpiano/">Volpiano</a> font.
+	Please make sure to have the font installed on your PC before using this.
+      </p>
+      <p>
+	Legend to the highlighting:
+	<span class="sylspace">syllable space</span>
+	<span class="wordspace">word space</span>
+	<span class="nonstandard">space of non-standard length</span>
+      </p>
+    </div>
 
     <script type="text/javascript">
 const editor = document.getElementById('editor');
