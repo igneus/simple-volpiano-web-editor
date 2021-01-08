@@ -6,7 +6,11 @@
     <meta charset="utf-8">
     <style>
       body, textarea { font-size: 12pt; }
-      #preview { font-family: Volpiano; font-size: 32pt; min-height: 32pt; }
+      textarea { width: 100%; min-height: 60px; }
+      #preview { font-family: Volpiano; font-size: 32pt; min-height: 32pt; background-color: #eee; margin: 20px 0; }
+      .wordspace { background-color: #f99; }
+      .sylspace { background-color: #99f; }
+      .nonstandard { background-color: magenta; }
     </style>
   </head>
   <body>
@@ -16,11 +20,40 @@
     </textarea>
 
     <script type="text/javascript">
-      const editor = document.getElementById('editor');
-      const preview = document.getElementById('preview');
-      const update = function (event) { preview.innerHTML = editor.value; };
-      editor.addEventListener('keyup', update);
-      update();
+const editor = document.getElementById('editor');
+const preview = document.getElementById('preview');
+
+const highlightChunk = function (text) {
+    if (text[0] != '-') return text;
+    if (text.length == 2) return '<span class="sylspace">'+text+'</span>';
+    if (text.length == 3) return '<span class="wordspace">'+text+'</span>';
+    if (text.length > 3) return '<span class="nonstandard">'+text+'</span>';
+    return text;
+};
+
+const highlight = function (text) {
+    var result = '';
+    var position = 0;
+
+    var stateContent = 0;
+    var stateSpace = 1;
+    var state = stateContent;
+
+    for (i = 0; i < text.length; ++i) {
+        var char = text[i];
+        var newState = (char == '-') ? stateSpace : stateContent;
+        if (newState != state) {
+            result += highlightChunk(text.substr(position, i-position));
+            state = newState;
+            position = i;
+        }
+    }
+
+    return result;
+};
+const update = function (event) { preview.innerHTML = highlight(editor.value); };
+editor.addEventListener('keyup', update);
+update();
     </script>
   </body>
 </html>
