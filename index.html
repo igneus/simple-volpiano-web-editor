@@ -1,0 +1,26 @@
+<!doctype html>
+
+<html>
+  <head>
+    <title>Simple Volpiano Editor</title>
+    <meta charset="utf-8">
+    <style>
+      body, textarea { font-size: 12pt; }
+      #preview { font-family: Volpiano; font-size: 32pt; min-height: 32pt; }
+    </style>
+  </head>
+  <body>
+    <div id="preview"></div>
+    <textarea id="editor">
+      1---
+    </textarea>
+
+    <script type="text/javascript">
+      const editor = document.getElementById('editor');
+      const preview = document.getElementById('preview');
+      const update = function (event) { preview.innerHTML = editor.value; };
+      editor.addEventListener('keyup', update);
+      update();
+    </script>
+  </body>
+</html>
