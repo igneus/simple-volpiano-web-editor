@@ -64,7 +64,16 @@ const highlight = function (text) {
 
     return result;
 };
-const update = function (event) { preview.innerHTML = highlight(editor.value); };
+const update = function (event) {
+    preview.innerHTML = highlight(editor.value);
+    window.location.hash = '#!' + editor.value;
+};
+
+// initial content provided in URL, load it
+if (window.location.hash.substr(0,2) == '#!') {
+    editor.value = window.location.hash.substr(2);
+}
+
 editor.addEventListener('keyup', update);
 update();
     </script>
