@@ -61,6 +61,7 @@ const highlight = function (text) {
             position = i;
         }
     }
+    result += highlightChunk(text.substr(position, text.length-position));
 
     return result;
 };
