@@ -37,6 +37,7 @@ const editor = document.getElementById('editor');
 const preview = document.getElementById('preview');
 
 const highlightChunk = function (text) {
+    if (text.endsWith('7')) text += '<br>';
     if (text[0] != '-') return text;
     if (text.length == 2) return '<span class="sylspace">'+text+'</span>';
     if (text.length == 3) return '<span class="wordspace">'+text+'</span>';
